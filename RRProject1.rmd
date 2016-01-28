@@ -1,14 +1,24 @@
 ---
-title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+title: "Reproducible Research Project 1"
+author: "Rich Huebner"
+date: "January 22, 2016"
+output: html_document
 ---
 
+# Introduction
+This project uses data from a personal activity monitoring device. The data contains information about the number of steps a person took at 5-minute intervals throughout the day. Data was collected anonymously during October & November, 2012.
 
-## Loading and preprocessing the data
+This document outlines all of the procedures used to determine the results of the questions in the assignment.
 
-Setting up the environment
+# The data set
+
+This data set was given as part of the Data Science course: Reproducible Research.
+
+The data set can be downloaded here: 
+[https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip](Data Set)
+
+
+# Setting up the environment
 
 ```{r, echo=TRUE}
 library(knitr)
@@ -23,7 +33,7 @@ library(knitr)
 library(lubridate)
 ```
 
-Next, change to my local working directory. I have everything on a D: under various directories. Change this to your own.
+Change to my local working directory. I have everything on a D: under various directories. Change this to your own.
 ```{r}
 setwd("D:\\data\\Rprojects\\RResearch_Project1")
 ```
@@ -34,8 +44,8 @@ data <- read.csv("activity.csv", header=TRUE, sep=",")
 data$date <- ymd(data$date)
 ```
 
-
-## What is mean total number of steps taken per day?
+## Question 1: What is the mean total number of steps taken per day?
+It is OK to ignore missing values in the data set.
 
 1. Calculate the total number of steps taken per day.
 
@@ -64,11 +74,10 @@ max_steps <- max(steps$steps, na.rm=TRUE)
 
 avg_steps
 median_steps
-max_steps
 ```
 
 
-## What is the average daily activity pattern?
+## Question 2: What is the average daily activity pattern?
 
 Create a time series plot (i.e. type = "l) of the 5-minute interval (x-axis) and the average number
 of steps taken, averaged across all days. 
@@ -101,8 +110,8 @@ i
 
 
 
-## Imputing missing values
 
+## Question 3: Imputing missing values.
 Calculate and report the total number of missing values (coded as NA). The presense of missing days may introduce bias into some calculations or summaries of the data.
 
 1. Calculate and report the total number of missing values in the data set. ()
@@ -133,6 +142,7 @@ Check to make sure the NAs are all gone.
 
 sum(is.na(imputed_data$steps))
 ```
+
 
 4. Make a histogram of the total number of steps taken each day and calculate and report the mean and median total number of steps taken per day. Do these values differ from the estimates from the first part of the assignment? What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
@@ -170,8 +180,7 @@ Note: The impact of imputing the data results in a mean and median of the same v
 
 
 
-
-## Are there differences in activity patterns between weekdays and weekends?
+# Question 4: Are there differences in activity patterns between weekdays and weekends?
 
 1. Create a new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 2. Make a panel plot comparing the average number of steps taken per 5-minute interval across weekdays and weekends
@@ -220,5 +229,12 @@ aggregate(steps ~ weektype, final, mean)
 
 
 This concludes the data analysis.
+
+
+
+
+
+
+
 
 
